@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useTaskListStore } from "../store/taskList"; // Adjust the import path as necessary
+import { useTaskListStore } from "../store/taskList";
 
 const newTask = ref("");
 const taskListStore = useTaskListStore();

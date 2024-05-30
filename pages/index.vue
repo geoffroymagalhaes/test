@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>ListPage</h1>
+    <h1>My List</h1>
     <TaskList />
   </div>
 </template>
