@@ -13,8 +13,16 @@ export const useTaskListStore = defineStore("taskList", {
     id: 0,
   }),
   actions: {
-    addTask(item: string) {
+    // async fetchTaskList() {
+    //   const { data }: any = await $fetch("/api/task");
+    //   this.taskList = data;
+    // },
+    async addTask(item: string) {
       this.taskList.push({ item, id: this.id++, completed: false });
+      const { data } = await $fetch("/api/task", {
+        method: "post",
+        body: { taskList: this.taskList },
+      });
     },
     deleteTask(id: number) {
       this.taskList = this.taskList.filter((task) => task.id !== id);
