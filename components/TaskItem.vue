@@ -11,8 +11,10 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 const { task } = defineProps(["task"]);
+
 import { useTaskListStore } from "../store/taskList";
 const taskListStore = useTaskListStore();
+
 const { toggleTask, deleteTask } = taskListStore;
 </script>
 

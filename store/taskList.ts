@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 
-// Define the structure of a task item
 interface Task {
   item: string;
   id: number;
@@ -9,25 +8,35 @@ interface Task {
 
 export const useTaskListStore = defineStore("taskList", {
   state: () => ({
-    taskList: [] as Task[], // Specify the type of taskList as an array of Task
+    taskList: [] as Task[],
     id: 0,
   }),
+
   actions: {
-    // async fetchTaskList() {
-    //   const { data }: any = await $fetch("/api/task");
-    //   this.taskList = data;
-    // },
-    async addTask(item: string) {
-      this.taskList.push({ item, id: this.id++, completed: false });
-      const { data } = await $fetch("/api/task", {
-        method: "post",
-        body: { taskList: this.taskList },
-      });
+    async fetchTasks() {
+      const response = await $fetch("/api/task");
+      this.taskList = response;
     },
-    deleteTask(id: number) {
+
+    async addTask(item: string) {
+      const newtask = await $fetch("/api/task", {
+        method: "post",
+        body: { item, id: this.id++, completed: false },
+      });
+      this.taskList.push(newtask);
+    },
+    async deleteTask(id: number) {
+      await $fetch(`/api/task?id=${id}`),
+        {
+          method: "delete",
+        };
       this.taskList = this.taskList.filter((task) => task.id !== id);
     },
-    toggleTask(id: number) {
+    async toggleTask(id: number) {
+      await $fetch(`/api/task?id=${id}`),
+        {
+          method: "patch",
+        };
       const todo = this.taskList.find((task) => task.id === id);
       if (todo) {
         todo.completed = !todo.completed;
