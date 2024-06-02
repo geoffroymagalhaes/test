@@ -1,12 +1,14 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form class="flex flex-col gap-7 items-center" @submit.prevent="handleSubmit">
     <input
+      autofocus
+      class="w-6/12 h-10 rounded-md text-center"
       v-model="newTask"
       type="text"
       placeholder="Name your task here"
       required
     />
-    <button type="submit">Add Task</button>
+    <button class="btn" type="submit">Add Task</button>
   </form>
 </template>
 

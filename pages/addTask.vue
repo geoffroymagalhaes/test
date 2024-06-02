@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Add a new task</h1>
+  <div class="text-center">
+    <h1 class="my-20 font-bold text-2xl">Add a new task</h1>
     <AddTaskForm />
   </div>
 </template>

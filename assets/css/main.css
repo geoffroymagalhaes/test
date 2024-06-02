@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-red-50 text-blue-950 tracking-wider;
+}
+
+@layer components {
+  .btn {
+    @apply bg-red-400 text-blue-950 px-3 py-2 rounded-md font-medium hover:opacity-80 hover:text-white;
+  }
+}

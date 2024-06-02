@@ -14,32 +14,32 @@ export const useTaskListStore = defineStore("taskList", {
 
   actions: {
     async fetchTasks() {
-      const response = await $fetch("/api/task");
+      const response = await $fetch(`/api/task`);
       this.taskList = response;
     },
 
     async addTask(item: string) {
-      const newtask = await $fetch("/api/task", {
-        method: "post",
+      const newtask = await $fetch(`/api/task`, {
+        method: "POST",
         body: { item, id: this.id++, completed: false },
       });
       this.taskList.push(newtask);
     },
+
     async deleteTask(id: number) {
-      await $fetch(`/api/task?id=${id}`),
-        {
-          method: "delete",
-        };
+      await $fetch(`/api/task?id=${id}`, {
+        method: "DELETE",
+      });
       this.taskList = this.taskList.filter((task) => task.id !== id);
     },
+
     async toggleTask(id: number) {
-      await $fetch(`/api/task?id=${id}`),
-        {
-          method: "patch",
-        };
-      const todo = this.taskList.find((task) => task.id === id);
-      if (todo) {
-        todo.completed = !todo.completed;
+      const updatedTask = await $fetch(`/api/task?id=${id}`, {
+        method: "PATCH",
+      });
+      const taskIndex = this.taskList.findIndex((task) => task.id === id);
+      if (taskIndex !== -1) {
+        this.taskList[taskIndex] = updatedTask;
       }
     },
   },
